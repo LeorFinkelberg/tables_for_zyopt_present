@@ -1,0 +1,96 @@
+\documentclass[%
+	11pt,
+	a4paper,
+	utf8,
+	%twocolumn
+		]{article}	
+
+\usepackage{style_packages/podvoyskiy_article_extended}
+
+
+\begin{document}
+\title{Сводка результатов анализа эффективности решателей}
+
+
+\date{}
+\maketitle
+
+\thispagestyle{fancy}
+
+%Здесь приводятся заметки по специальным вопросам теории оптимизации
+
+%\shorttableofcontents{Краткое содержание}{1}
+
+%\tableofcontents
+
+% ========================= 2023_07_YANOS_2690.mps =========================
+% original problem has 106674 variables (0 bin, 3069 int, 0 impl, 103605 cont) and 106029 constraints
+% 21838 rows 36143 cols (343 binary, 2437 integer, 170 implied int., 33193 continuous) 109034 nonzeros
+% --- Переменные ---
+\newcommand\cplexObj{1.2286400825e+07}
+\newcommand\zyoptObj{1.2285012e+07}
+\newcommand\highsObj{1.2296637e+07}
+\newcommand\cplexZyoptObjRel{(\fpeval{\cplexObj} - \fpeval{\zyoptObj}) / \fpeval{\cplexObj} * 100}
+\newcommand\cplexHighsObjRel{(\fpeval{\cplexObj} - \fpeval{\highsObj}) / \fpeval{\highsObj} * 100}
+
+\fpeval{trunc(3.3454355, 2)}
+
+афыафыва $ \fpeval{trunc(\cplexZyoptObjRel, 2)} $
+asdfasdf $ \fpeval{\cplexHighsObjRel} $
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_07\_YANOS\_2690.mps}}
+		
+		{\footnotesize \texttt{NVars}: 106674 (\texttt{NBinVars}: 0,  \texttt{NIntVars}: 3069) \texttt{NConss}: 106029}\\[2mm]
+		
+		\begin{tabular}{ p{2.7cm} p{2.5cm} p{3.6cm} p{3.7cm}}
+			\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Первое допустимое решение} \\
+			\hline\hline\\[-3.5mm]
+			{CPLEX 12.8.0.0} & $ 1.00^a $ & $ 1.228640 $ & - \\
+			\hline
+			{CBC} & $ 1.00^a $ & $ \infty $ & - \\
+			\hline
+			{SCIP 8.0.3} & $ 1.00^a $ & $ \infty $ & -  \\
+			\hline
+			{HiGHS 1.5.3} & $ 1.00^a $ & $ 1.229664 $ $ ({\color{red} \fpeval{trunc(\cplexHighsObjRel, 4)}\%}) $ & 1.229664 за 47.6 сек. \\
+			\hline
+			ZyOpt$^b$ & $ 1.00^a $  & $ 1.228501 $ $ ({\color{blue} +\fpeval{trunc(\cplexZyoptObjRel, 4)}\%}) $ & 1.231342 за 7.1 сек. \\
+		\end{tabular}
+	\end{table}
+\vspace*{-3mm}
+\hspace*{5mm}$ a $ -- {\footnotesize Решение остановлено по времени}
+
+\hspace*{5mm}$ b $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}
+}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_07\_YANOS\_2690.mps}}
+		
+		{\footnotesize \texttt{NVars}: 106674 (\texttt{NBinVars}: 0,  \texttt{NIntVars}: 3069) \texttt{NConss}: 106029}\\[2mm]
+		
+		\begin{tabular}{ p{2.7cm} p{2.5cm} p{3.6cm} p{3.7cm}}
+			\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Первое допустимое решение} \\
+			\hline\hline\\[-3.5mm]
+			{CPLEX 12.8.0.0} & $ 1.00^a $ & $ 1.228640 $ & - \\
+			\hline
+			{CBC} & $ 1.00^a $ & $ \infty $ & - \\
+			\hline
+			{SCIP 8.0.3} & $ 1.00^a $ & $ \infty $ & -  \\
+			\hline
+			{HiGHS 1.5.3} & $ 1.00^a $ & $ 1.229664 $ $ ({\color{red} -0.0833\%}) $ & 1.229664 за 47.6 сек. \\
+			\hline
+			ZyOpt$^b$ & $ 1.00^a $  & $ 1.228501 $ $ ({\color{blue} +0.0113\%}) $ & 1.231342 за 7.1 сек. \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize Решение остановлено по времени}
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}
+}
+\end{document}
