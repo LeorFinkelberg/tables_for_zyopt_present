@@ -24,12 +24,12 @@
 %\tableofcontents
 
 % COLORS
-\newcommand\ccr[1]{\cellcolor{red!20}{#1}}
-\newcommand\ccb[1]{\cellcolor{blue!20}{#1}}
+\newcommand\ccb[1]{\cellcolor{red!10}{#1}}
+\newcommand\ccg[1]{\cellcolor{green!10}{#1}}
 
 % ========================= 2023_07_YANOS_2690.mps =========================
 % original problem has 106674 variables (0 bin, 3069 int, 0 impl, 103605 cont) and 106029 constraints
-% 21838 rows 36143 cols (343 binary, 2437 integer, 170 implied int., 33193 continuous) 109034 nonzeros
+
 % --- Переменные ---
 \def\nVarsA{106674}
 \def\nBinVarsA{0}
@@ -37,64 +37,63 @@
 \def\nConssA{106029}
 
 \def\firstSolHighsObjA{1.2296637}  % e+07
-\def\firstSolHighsTimeA{47.6}
+\def\firstSolHighsTimeA{47.6 / 60}
 \def\firstSolZyoptObjA{1.2313417}  % e+07
-\def\firstSolZyoptTimeA{7.1}
+\def\firstSolZyoptTimeA{7.1 / 60}
 
-\newcommand{\cplexObjA}{1.2286400825}  % e+07
+\newcommand{\cplexObjA}{1.228640082}  % e+07
 \newcommand{\zyoptObjA}{1.2285012}  % e+07
 \newcommand{\highsObjA}{1.2296637}  % e+07
 \newcommand{\cplexZyoptObjRelA}{(\fpeval{\cplexObjA} - \fpeval{\zyoptObjA}) / \fpeval{\cplexObjA} * 100}
 \newcommand{\cplexHighsObjRelA}{(\fpeval{\cplexObjA} - \fpeval{\highsObjA}) / \fpeval{\cplexObjA} * 100}
 
-{
+\vspace*{-20mm}
+{%
 	% \rowcolors{2}{white}{lightgray!15}
 	\begin{table}[!h]
 		\centering
 		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_07\_YANOS\_2690.mps}}
 		
-		{\footnotesize \texttt{NVars}: $ \nVarsA $ (\texttt{NBinVars}: $ \nBinVarsA $,  \texttt{NIntVars}: $ \nIntVarsA $) \texttt{NConss}: $ \nConssA $}\\[2mm]
-		
-		\begin{tabular}{ p{2.7cm} p{2.5cm} p{3.6cm} p{3.6cm} p{3.2cm} }
-			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, сек} \\
+		{\footnotesize \texttt{NVars}: $ \nVarsA $ (\texttt{NBinVars}: $ \nBinVarsA $,  \texttt{NIntVars}: $ \nIntVarsA $) \texttt{NConss}: $ \nConssA $ \texttt{NonzeroDensity}: $ 2.5376 \cdot 10^{-5} $}\\[2mm]
+
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, мин} \\
 			%\hline\hline\\[-3.5mm]
 			\hline
-			{CPLEX 12.8.0.0} & $ 1.00^a $ & $ \fpeval{trunc(\cplexObjA, 6)} $ & - & -\\
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 1.00^b $ & $ \fpeval{trunc(\cplexObjA, 6)} $ & $ - $ & $ - $ \\
 			%\hline
-			\rowcolor{black!5}{CBC} & $ 1.00^a $ & $ \infty $ & - & - \\
+			\rowcolor{black!5}{CBC} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
 			% \hline
-			{SCIP 8.0.3} & $ 1.00^a $ & $ \infty $ & - & - \\
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
 			%\hline
-			\rowcolor{black!5}{HiGHS 1.5.3} & $ 1.00^a $ & \ccr{$ \ccr{\fpeval{trunc(\highsObjA, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelA, 4)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjA, 6)} $ & $ \fpeval{\firstSolHighsTimeA} $ \\
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 1.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\highsObjA, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelA, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjA, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeA, 3)} $ \\
 			%\hline
-			ZyOpt$^b$ & $ 1.00^a $  & \ccb{$ \fpeval{trunc(\zyoptObjA, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelA, 4)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjA, 6)} $ & $ \fpeval{\firstSolZyoptTimeA} $ \\
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 1.00^b $  & \ccg{$ \fpeval{trunc(\zyoptObjA, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelA, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjA, 6)} $ & $ \fpeval{trunc(\firstSolZyoptTimeA, 3)} $ \\
 		\end{tabular}
+	
 	\end{table}
-\vspace*{-3mm}
-\hspace*{5mm}$ a $ -- {\footnotesize Решение остановлено по времени}
+	\vspace*{-3mm}
+\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
 
-\hspace*{5mm}$ b $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}
+\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+
+\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}
 }
 
-
-
-
-
-
-
+\vspace*{5mm}
 % ========================= 2023_08_YANOS_2693.mps =========================
 % original problem has 89608 variables (0 bin, 2480 int, 0 impl, 87128 cont) and 87714 constraints
 % 11483 rows 24202 cols (151 binary, 2033 integer, 75 implied int., 21943 continuous) 71521 nonzeros
 % --- Переменные ---
-\def\NVarsB{89608}
-\def\NBinVarsB{0}
-\def\NIntVarsB{2480}
-\def\NConssB{87714}
+\def\nVarsB{89608}
+\def\nBinVarsB{0}
+\def\nIntVarsB{2480}
+\def\nConssB{87714}
 
 \def\firstSolHighsObjB{1.0892041}  % e+07
-\def\firstSolHighsTimeB{12.8}
+\def\firstSolHighsTimeB{12.8 / 60}
 \def\firstSolZyoptObjB{1.0594730}  % e+07
-\def\firstSolZyoptTimeB{1.6}
+\def\firstSolZyoptTimeB{1.6 / 60}
 
 \newcommand{\cplexObjB}{1.0479476651}
 \newcommand{\highsObjB}{1.0486380}
@@ -108,29 +107,605 @@
 		\centering
 		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_08\_YANOS\_2693.mps}}
 		
-		{\footnotesize \texttt{NVars}: $ \nVarsA $ (\texttt{NBinVars}: $ \nBinVarsA $,  \texttt{NIntVars}: $ \nIntVarsA $) \texttt{NConss}: $ \nConssA $}\\[2mm]
-		
-		\begin{tabular}{ p{2.7cm} p{2.5cm} p{3.6cm} p{3.6cm} p{3.2cm} }
-			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, сек} \\
-			\hline\hline\\[-3.5mm]
-			{CPLEX 12.8.0.0} & $ 1.00^a $ & $ \fpeval{trunc(\cplexObjB, 6)} $ & - & -\\
+		{\footnotesize \texttt{NVars}: $ \nVarsB $ (\texttt{NBinVars}: $ \nBinVarsA $,  \texttt{NIntVars}: $ \nIntVarsB $) \texttt{NConss}: $ \nConssB $ \texttt{NonzeroDensity}: $ 2.9449 \cdot 10^{-5} $}\\[2mm]
+
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
 			\hline
-			\rowcolor{black!5}{CBC} & $ 1.00^a $ & $ \infty $ & - & - \\
-			\hline
-			{SCIP 8.0.3} & $ 1.00^a $ & $ \infty $ & - & - \\
-			\hline
-			\rowcolor{black!5}{HiGHS 1.5.3} & $ 1.00^a $ & \ccr{$ \ccr{\fpeval{trunc(\highsObjB, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelB, 4)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjB, 6)} $ & $ \fpeval{\firstSolHighsTimeB} $ \\
-			\hline
-			ZyOpt$^b$ & $ 1.00^a $  & \ccr{$ \fpeval{trunc(\zyoptObjB, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelB, 4)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjB, 6)} $ & $ \fpeval{\firstSolZyoptTimeB} $ \\
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 1.00^b $ & $ \fpeval{trunc(\cplexObjB, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+		\rowcolor{black!5}	{CBC} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 1.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\highsObjB, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelB, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjB, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeB, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 1.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjB, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelB, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjB, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeB, 3)} \\
 		\end{tabular}
 	\end{table}
 	\vspace*{-3mm}
-	\hspace*{5mm}$ a $ -- {\footnotesize Решение остановлено по времени}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
 	
-	\hspace*{5mm}$ b $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
 }
 
+\vspace*{5mm}
+% ========================= 2023_06_YANOS_2688.mps =========================
+% original problem has 82442 variables (0 bin, 2790 int, 0 impl, 79652 cont) and 95839 constraints
+% --- Переменные ---
+\def\nVarsC{82442}
+\def\nBinVarsC{0}
+\def\nIntVarsC{2790}
+\def\nConssC{95839}
 
+\def\firstSolHighsObjC{4.555539}  % e+06
+\def\firstSolHighsTimeC{15.1 / 60}
+\def\firstSolZyoptObjC{4.366211}  % e+06
+\def\firstSolZyoptTimeC{33.8 / 60}
+\def\firstSolScipObjC{4.137448}  % e+06
+\def\firstSolScipTimeC{31.0 / 60}
+
+\newcommand{\cplexObjC}{3.9378762342}  % e+06
+\newcommand{\scipObjC}{3.95642370}  % e+06
+\newcommand{\highsObjC}{3.959913}  % e+06
+\newcommand{\zyoptObjC}{3.990119}  % e+06
+\newcommand{\cplexZyoptObjRelC}{(\fpeval{\cplexObjC} - \fpeval{\zyoptObjC}) / \fpeval{\cplexObjC} * 100}
+\newcommand{\cplexHighsObjRelC}{(\fpeval{\cplexObjC} - \fpeval{\highsObjC}) / \fpeval{\cplexObjC} * 100}
+\newcommand{\cplexScipObjRelC}{(\fpeval{\cplexObjC} - \fpeval{\scipObjC}) / \fpeval{\cplexObjC} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_YANOS\_2688.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsC $ (\texttt{NBinVars}: $ \nBinVarsC $,  \texttt{NIntVars}: $ \nIntVarsC $) \texttt{NConss}: $ \nConssC $ \texttt{NonzeroDensity}: $3.0860 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{6} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^6 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 5.00^b $ & $ \fpeval{trunc(\cplexObjC, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 5.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\scipObjC, 6)}} $} $ (\fpeval{trunc(\cplexScipObjRelC, 3)}\%) $ & $ \fpeval{trunc(\firstSolScipObjC, 6)} $ & \fpeval{trunc(\firstSolScipTimeC, 3)} \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 5.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\highsObjC, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelC, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjC, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeC, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 5.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjC, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelC, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjC, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeC, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\newpage
+% ========================= 2023_06_YANOS_KF_NB.mps =========================
+% original problem has 87071 variables (0 bin, 3616 int, 0 impl, 83455 cont) and 100468 constraints
+% --- Переменные ---
+\def\nVarsD{87071}
+\def\nBinVarsD{0}
+\def\nIntVarsD{3616}
+\def\nConssD{100468}
+
+\def\firstSolHighsObjD{4.165115}  % e+06
+\def\firstSolHighsTimeD{ 77.6 / 60}
+\def\firstSolZyoptObjD{4.133916}  % e+06
+\def\firstSolZyoptTimeD{ 127 / 60}
+\def\firstSolScipObjD{4.371621}  % e+06
+\def\firstSolScipTimeD{ 55 / 60}
+
+\newcommand{\cplexObjD}{4.0842115474}  % e+06
+\newcommand{\scipObjD}{4.162588}  % e+06
+\newcommand{\highsObjD}{4.165121}  % e+06
+\newcommand{\zyoptObjD}{4.133916}  % e+06
+\newcommand{\cplexZyoptObjRelD}{(\fpeval{\cplexObjD} - \fpeval{\zyoptObjD}) / \fpeval{\cplexObjD} * 100}
+\newcommand{\cplexHighsObjRelD}{(\fpeval{\cplexObjD} - \fpeval{\highsObjD}) / \fpeval{\cplexObjD} * 100}
+\newcommand{\cplexScipObjRelD}{(\fpeval{\cplexObjD} - \fpeval{\scipObjD}) / \fpeval{\cplexObjD} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_YANOS\_KF\_NB.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsD $ (\texttt{NBinVars}: $ \nBinVarsD $,  \texttt{NIntVars}: $ \nIntVarsD $) \texttt{NConss}: $ \nConssD $ \texttt{NonzeroDensity}: $2.9191 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{6} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^6 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 3.00^b $ & $ \fpeval{trunc(\cplexObjD, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 3.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 3.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\scipObjD, 6)}} $} $ (\fpeval{trunc(\cplexScipObjRelD, 3)}\%) $ & $ \fpeval{trunc(\firstSolScipObjD, 6)} $ & \fpeval{trunc(\firstSolScipTimeD, 3)} \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 3.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\highsObjD, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelD, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjD, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeD, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 3.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjD, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelD, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjD, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeD, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_06_YANOS_KF_NB_Int_Idle.mps.mps =========================
+% original problem has 87071 variables (0 bin, 6398 int, 0 impl, 80673 cont) and 100468 constraints
+% --- Переменные ---
+\def\nVarsE{87071}
+\def\nBinVarsE{0}
+\def\nIntVarsE{6398}
+\def\nConssE{100468}
+
+\def\firstSolHighsObjE{}  % e+06
+\def\firstSolHighsTimeE{  / 60}
+\def\firstSolZyoptObjE{4.265474}  % e+06
+\def\firstSolZyoptTimeE{ 25.1 / 60}
+\def\firstSolScipObjE{4.258917}  % e+06
+\def\firstSolScipTimeE{ 43 / 60}
+
+\newcommand{\cplexObjE}{4.09380017}  % e+06
+\newcommand{\scipObjE}{4.172394}  % e+06
+\newcommand{\zyoptObjE}{4.197091}  % e+06
+\newcommand{\cplexZyoptObjRelE}{(\fpeval{\cplexObjE} - \fpeval{\zyoptObjE}) / \fpeval{\cplexObjE} * 100}
+\newcommand{\cplexHighsObjRelE}{(\fpeval{\cplexObjE} - \fpeval{\highsObjE}) / \fpeval{\cplexObjE} * 100}
+\newcommand{\cplexScipObjRelE}{(\fpeval{\cplexObjE} - \fpeval{\scipObjE}) / \fpeval{\cplexObjE} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_YANOS\_KF\_NB\_Int\_Idle.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsE$ (\texttt{NBinVars}: $ \nBinVarsE $,  \texttt{NIntVars}: $ \nIntVarsE $) \texttt{NConss}: $ \nConssE $ \texttt{NonzeroDensity}: $2.9191 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{6} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^6 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 5.00^b $ & $ \fpeval{trunc(\cplexObjE, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 5.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\scipObjE, 6)}} $} $ (\fpeval{trunc(\cplexScipObjRelE, 3)}\%) $ & $ \fpeval{trunc(\firstSolScipObjE, 6)} $ & \fpeval{trunc(\firstSolScipTimeE, 3)} \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 5.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjE, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelE, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjE, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeE, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_06_MNPZ_2673.mps =========================
+% original problem has 84821 variables (0 bin, 4588 int, 0 impl, 80233 cont) and 81624 constraints
+% --- Переменные ---
+\def\nVarsF{84821}
+\def\nBinVarsF{0}
+\def\nIntVarsF{4588}
+\def\nConssF{81624}
+
+\def\firstSolHighsObjF{6.68203}  % e+06
+\def\firstSolHighsTimeF{ 36.8 / 60}
+\def\firstSolZyoptObjF{6.66437}  % e+06
+\def\firstSolZyoptTimeF{ 9.7 / 60}
+\def\firstSolScipObjF{}  % e+06
+\def\firstSolScipTimeF{  / 60}
+
+\newcommand{\cplexObjF}{6.48755706}  % e+06
+\newcommand{\zyoptObjF}{6.60533}  % e+06
+\newcommand{\highsObjF}{6.52544}  % e+06
+\newcommand{\cplexZyoptObjRelF}{(\fpeval{\cplexObjF} - \fpeval{\zyoptObjF}) / \fpeval{\cplexObjF} * 100}
+\newcommand{\cplexHighsObjRelF}{(\fpeval{\cplexObjF} - \fpeval{\highsObjF}) / \fpeval{\cplexObjF} * 100}
+\newcommand{\cplexScipObjRelF}{(\fpeval{\cplexObjF} - \fpeval{\scipObjF}) / \fpeval{\cplexObjF} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_MNPZ\_2673.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsF $ (\texttt{NBinVars}: $ \nBinVarsF $,  \texttt{NIntVars}: $ \nIntVarsF $) \texttt{NConss}: $ \nConssF $ \texttt{NonzeroDensity}: $3.1204 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{5} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^5 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 3.00^b $ & $ \fpeval{trunc(\cplexObjF, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 3.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 3.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 3.00^b $ & \ccb{ $ \fpeval{trunc(\highsObjF, 6)} $} $(\fpeval{trunc(\cplexHighsObjRelF, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjF, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeF, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 3.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjF, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelF, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjF, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeF, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\newpage
+% ========================= 2023_06_MNPZ_2673_KF_NB.mps =========================
+% original problem has 88344 variables (0 bin, 5390 int, 0 impl, 82954 cont) and 85147 constraints
+
+% --- Переменные ---
+\def\nVarsG{88344}
+\def\nBinVarsG{0}
+\def\nIntVarsG{5390}
+\def\nConssG{85147}
+
+\def\firstSolHighsObjG{6.99123}  % e+06
+\def\firstSolHighsTimeG{ 31.3 / 60}
+\def\firstSolZyoptObjG{6.78893}  % e+06
+\def\firstSolZyoptTimeG{ 10 / 60}
+\def\firstSolScipObjG{}  % e+06
+\def\firstSolScipTimeG{  / 60}
+
+\newcommand{\cplexObjG}{6.487557066}  % e+06
+\newcommand{\zyoptObjG}{6.67619}  % e+06
+\newcommand{\highsObjG}{6.66327}  % e+06
+\newcommand{\cplexZyoptObjRelG}{(\fpeval{\cplexObjG} - \fpeval{\zyoptObjG}) / \fpeval{\cplexObjG} * 100}
+\newcommand{\cplexHighsObjRelG}{(\fpeval{\cplexObjG} - \fpeval{\highsObjG}) / \fpeval{\cplexObjG} * 100}
+\newcommand{\cplexScipObjRelG}{(\fpeval{\cplexObjG} - \fpeval{\scipObjG}) / \fpeval{\cplexObjG} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_MNPZ\_2673\_KF\_NB.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsG $ (\texttt{NBinVars}: $ \nBinVarsG $,  \texttt{NIntVars}: $ \nIntVarsG $) \texttt{NConss}: $ \nConssG $ \texttt{NonzeroDensity}: $2.9853 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{5} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^5 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 2.00^b $ & $ \fpeval{trunc(\cplexObjG, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 2.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 2.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 2.00^b $ & \ccb{ $ \fpeval{trunc(\highsObjG, 6)} $} $(\fpeval{trunc(\cplexHighsObjRelG, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjG, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeG, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 2.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjG, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelG, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjG, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeG, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_06_ONPZ_2683_no_KF_NPZ.mps =========================
+% original problem has 254389 variables (0 bin, 25410 int, 0 impl, 228979 cont) and 202597 constraints
+
+% --- Переменные ---
+\def\nVarsK{254389}
+\def\nBinVarsK{0}
+\def\nIntVarsK{25410}
+\def\nConssK{202597}
+
+\def\firstSolZyoptObjK{7.751731}  % e+06
+\def\firstSolZyoptTimeK{ 15.4 / 60}
+
+\newcommand{\cplexObjK}{8.5512364866}  % e+06
+\newcommand{\zyoptObjK}{7.666215}  % e+06
+\newcommand{\cplexZyoptObjRelK}{(\fpeval{\cplexObjK} - \fpeval{\zyoptObjK}) / \fpeval{\cplexObjK} * 100}
+\newcommand{\cplexHighsObjRelK}{(\fpeval{\cplexObjK} - \fpeval{\highsObjK}) / \fpeval{\cplexObjK} * 100}
+\newcommand{\cplexScipObjRelK}{(\fpeval{\cplexObjK} - \fpeval{\scipObjK}) / \fpeval{\cplexObjK} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_ONPZ\_2683\_no\_KF\_NPZ.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsK $ (\texttt{NBinVars}: $ \nBinVarsK $,  \texttt{NIntVars}: $ \nIntVarsK $) \texttt{NConss}: $ \nConssK $ \texttt{NonzeroDensity}: $1.3999 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.6cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{6} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^6 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 5.00^b $ & $ \fpeval{trunc(\cplexObjK, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 5.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 5.00^b $  & \ccg{$ \fpeval{trunc(\zyoptObjK, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelK, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjK, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeK, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_03_ONPZ_1615.mps =========================
+% original problem has 320066 variables (62 bin, 32972 int, 0 impl, 287032 cont) and 252539 constraints
+% --- Переменные ---
+\def\nVarsL{320066}
+\def\nBinVarsL{62}
+\def\nIntVarsL{32972}
+\def\nConssL{252539}
+
+\def\firstSolZyoptObjL{1.3084936}  % e+07
+\def\firstSolZyoptTimeL{ 927.8 / 60}
+
+\newcommand{\cplexObjL}{1.6715141}  % e+07
+\newcommand{\zyoptObjL}{1.3084936}  % e+07
+\newcommand{\cplexZyoptObjRelL}{(\fpeval{\cplexObjL} - \fpeval{\zyoptObjL}) / \fpeval{\cplexObjL} * 100}
+\newcommand{\cplexHighsObjRelL}{(\fpeval{\cplexObjL} - \fpeval{\highsObjL}) / \fpeval{\cplexObjL} * 100}
+\newcommand{\cplexScipObjRelL}{(\fpeval{\cplexObjL} - \fpeval{\scipObjL}) / \fpeval{\cplexObjL} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_03\_ONPZ\_1615.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsL $ (\texttt{NBinVars}: $ \nBinVarsL $,  \texttt{NIntVars}: $ \nIntVarsL $) \texttt{NConss}: $ \nConssL $ \texttt{NonzeroDensity}: $1.1534 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.6cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 60.00^b $ & $ \fpeval{trunc(\cplexObjL, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 60.00^b $  & \ccg{$ \fpeval{trunc(\zyoptObjL, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelL, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjL, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeL, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\newpage 
+% ========================= 2023_03_ONPZ_1615_Slacks_KF_NPZ.mps =========================
+% original problem has 321478 variables (62 bin, 32972 int, 0 impl, 288444 cont) and 252539 constraints
+% --- Переменные ---
+\def\nVarsM{321478}
+\def\nBinVarsM{62}
+\def\nIntVarsM{32972}
+\def\nConssM{252539}
+
+\def\firstSolZyoptObjM{15.87143527}  % e+08
+\def\firstSolZyoptTimeM{ 249.4 / 60}
+
+\newcommand{\cplexObjM}{8.166203}  % e+08
+\newcommand{\zyoptObjM}{10.13394482}  % e+08
+\newcommand{\cplexZyoptObjRelM}{(\fpeval{\cplexObjM} - \fpeval{\zyoptObjM}) / \fpeval{\cplexObjM} * 100}
+\newcommand{\cplexHighsObjRelM}{(\fpeval{\cplexObjM} - \fpeval{\highsObjM}) / \fpeval{\cplexObjM} * 100}
+\newcommand{\cplexScipObjRelM}{(\fpeval{\cplexObjM} - \fpeval{\scipObjM}) / \fpeval{\cplexObjM} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_03\_ONPZ\_1615\_Slacks\_KF\_NPZ.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsM $ (\texttt{NBinVars}: $ \nBinVarsM $,  \texttt{NIntVars}: $ \nIntVarsM $) \texttt{NConss}: $ \nConssM $ \texttt{NonzeroDensity}: $1.1500 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{7} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^7 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 60.00^b $ & $ \fpeval{trunc(\cplexObjM, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 60.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjM, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelM, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjM, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeM, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_06_ONPZ_2683_Slacks_KF_NPZ.mps =========================
+% original problem has 256459 variables (0 bin, 26100 int, 0 impl, 230359 cont) and 203287 constraints
+% --- Переменные ---
+\def\nVarsN{256459}
+\def\nBinVarsN{0}
+\def\nIntVarsN{26100}
+\def\nConssN{203287}
+
+\def\firstSolHighsObjN{6.39697155}  % e+08
+\def\firstSolHighsTimeN{ 1304.8 / 60}
+\def\firstSolZyoptObjN{23.87868376}  % e+08
+\def\firstSolZyoptTimeN{ 24.8 / 60}
+
+\newcommand{\cplexObjN}{13.340460588}  % e+08
+\newcommand{\zyoptObjN}{3.53782942}  % e+08
+\newcommand{\highsObjN}{6.39697155}  % e+08
+\newcommand{\cplexZyoptObjRelN}{(\fpeval{\cplexObjN} - \fpeval{\zyoptObjN}) / \fpeval{\cplexObjN} * 100}
+\newcommand{\cplexHighsObjRelN}{(\fpeval{\cplexObjN} - \fpeval{\highsObjN}) / \fpeval{\cplexObjN} * 100}
+\newcommand{\cplexScipObjRelN}{(\fpeval{\cplexObjN} - \fpeval{\scipObjN}) / \fpeval{\cplexObjN} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_06\_ONPZ\_2683\_Slacks\_KF\_NPZ.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsN $ (\texttt{NBinVars}: $ \nBinVarsN $,  \texttt{NIntVars}: $ \nIntVarsN $) \texttt{NConss}: $ \nConssN $ \texttt{NonzeroDensity}: $ 1.4414 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{8} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^8 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 60.00^b $ & $ \fpeval{trunc(\cplexObjN, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 60.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 60.00^b $ & \ccg{ $ \fpeval{trunc(\highsObjN, 6)} $} $(+\fpeval{trunc(\cplexHighsObjRelN, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjN, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeN, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 60.00^b $  & \ccg{$ \fpeval{trunc(\zyoptObjN, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelN, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjN, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeN, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2023_03_3NPZ_1615_Slacks_KF_NPZ.mps =========================
+% original problem has 443669 variables (93 bin, 42835 int, 0 impl, 400741 cont) and 360300 constraints
+% --- Переменные ---
+\def\nVarsP{443669}
+\def\nBinVarsP{93}
+\def\nIntVarsP{42835}
+\def\nConssP{360300}
+
+\def\firstSolHighsObjP{2.639431405}  % e+09
+\def\firstSolHighsTimeP{ 147.7 / 60}
+\def\firstSolZyoptObjP{1.357399548}  % e+09
+\def\firstSolZyoptTimeP{ 1593 / 60}
+
+\newcommand{\cplexObjP}{2.486351493}  % e+09
+\newcommand{\zyoptObjP}{1.357399548}  % e+09
+\newcommand{\highsObjP}{2.639431404}  % e+09
+\newcommand{\cplexZyoptObjRelP}{(\fpeval{\cplexObjP} - \fpeval{\zyoptObjP}) / \fpeval{\cplexObjP} * 100}
+\newcommand{\cplexHighsObjRelP}{(\fpeval{\cplexObjP} - \fpeval{\highsObjP}) / \fpeval{\cplexObjP} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2023\_03\_3NPZ\_1615\_Slacks\_KF\_NPZ.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsP $ (\texttt{NBinVars}: $ \nBinVarsP $,  \texttt{NIntVars}: $ \nIntVarsP $) \texttt{NConss}: $ \nConssP $ \texttt{NonzeroDensity}: $ 8.2112 \cdot 10^{-6} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.55cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{9} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^9 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 120.00^b $ & $ \fpeval{trunc(\cplexObjP, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 120.00^b $ & \ccb{ $ \fpeval{trunc(\highsObjP, 6)} $} $(\fpeval{trunc(\cplexHighsObjRelP, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjP, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeP, 3)} $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 120.00^b $  & \ccg{$ \fpeval{trunc(\zyoptObjP, 6)} $} $ (+\fpeval{trunc(\cplexZyoptObjRelP, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjP, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeP, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION}\\[-7mm]
+}
+
+\newpage
+% ========================= 2666.mps =========================
+% 
+% --- Переменные ---
+\def\nVarsQ{156581}
+\def\nBinVarsQ{0}
+\def\nIntVarsQ{26850}
+\def\nConssQ{284766}
+\def\firstSolZyoptObjQ{6.54781}  % e+05
+\def\firstSolZyoptTimeQ{ 1675.2 / 60}
+
+\newcommand{\cplexObjQ}{6.314371}  % e+05
+\newcommand{\zyoptObjQ}{6.472611}  % e+05
+\newcommand{\zyoptGapQ}{2.97}
+\newcommand{\highsObjQ}{}  % e+05
+\newcommand{\cplexZyoptObjRelQ}{(\fpeval{\cplexObjQ} - \fpeval{\zyoptObjQ}) / \fpeval{\cplexObjQ} * 100}
+\newcommand{\cplexScipObjRelQ}{(\fpeval{\cplexObjQ} - \fpeval{\scipObjQ}) / \fpeval{\cplexObjQ} * 100}
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности \\решателей на проблеме \texttt{2666.mps}}
+		
+		{\footnotesize \texttt{NVars}: $ \nVarsQ $ (\texttt{NBinVars}: $ \nBinVarsQ $,  \texttt{NIntVars}: $ \nIntVarsQ $) \texttt{NConss}: $ \nConssQ $ \texttt{NonzeroDensity}: $ 2.4507 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{5} $ & \emph{Целевая функция первого допустимого решения, $ \times 10^5 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 120.00^b $ & $ \fpeval{trunc(\cplexObjQ, 6)} $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}	{CBC} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{COPT 6.0.5} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			\rowcolor{blue!5}{Archiplex 1.0.2.41} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 120.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^c$ & $ 120.00^b $  & \ccb{$ \fpeval{trunc(\zyoptObjQ, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelQ, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjQ, 6)} $ & \fpeval{trunc(\firstSolZyoptTimeQ, 3)} \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{5mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{5mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION}\\[-7mm]
+}
 
 
 
