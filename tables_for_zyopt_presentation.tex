@@ -70,7 +70,7 @@ ZyOpt допускает пользовательскую конфигураци
 			{} & {} & \multicolumn{5}{c}{\emph{Верхняя граница решения (без экспоненциальной части)}}\\[2mm]
 			\emph{Проблемы группы ИКП} & $ T $\emph{, мин} & CBC & SCIP$^a $ & HiGHS$ ^b $ & ZyOpt & CPLEX$ ^c $ \\
 			\hline\hline
-			\rowcolor{blue!3}\texttt{2023\_08\_YANOS\_2693.mps} & 1.0 & $ \infty $ & $ \infty $ & \ccb{ $ 1.05 (-0.07\%) $ } & \ccb{ $ 1.05 (-0.10\%) $ } & $ 1.05 $ \\
+			\rowcolor{blue!3}\texttt{2023\_08\_YANOS\_2693.mps} & 1.0 & $ \infty $ & \ccb{$ 1.05 (-0.16\%) $} & \ccb{ $ 1.05 (-0.07\%) $ } & \ccb{ $ 1.05 (-0.10\%) $ } & $ 1.05 $ \\
 			\rowcolor{black!5}\texttt{2023\_07\_YANOS\_2690.mps} & 1.0 & $ \infty $ & $ \infty $ & \ccb{$ 1.23 (-0.08\%) $} & \ccg{ $ 1.23 (+0.01\%) $ } & $ 1.23 $ \\
 			\rowcolor{blue!3}\texttt{2023\_06\_YANOS\_KF\_NB.mps} & 3.0 & $ \infty $ & \ccb{$ 4.16 (-1.92\%) $} & \ccb{ $ 4.17 (-1.98\%) $ } & \ccb{ $ 4.13 (-1.22\%) $ } & $ 4.09 $ \\
 			\rowcolor{black!5}\texttt{2023\_06\_YANOS\_2688.mps} & 5.0 & $ \infty $ & \ccb{ $ 3.96 (-0.47\%) $} & \ccb{ $ 3.96 (-0.56\%) $ } & \ccb{ $ 3.99 (-1.33\%) $ } & $ 3.94 $\\
@@ -217,12 +217,16 @@ ZyOpt допускает пользовательскую конфигураци
 \def\firstSolHighsTimeB{12.8 / 60}
 \def\firstSolZyoptObjB{1.0594730}  % e+07
 \def\firstSolZyoptTimeB{1.6 / 60}
+\def\firstSolScipObjB{1.049621}  % e+07
+\def\firstSolScipTimeB{39 / 60}
 
 \newcommand{\cplexObjB}{1.0479476651}
 \newcommand{\highsObjB}{1.0486380}
 \newcommand{\zyoptObjB}{1.0489574}
+\newcommand{\scipObjB}{1.049621}
 \newcommand{\cplexZyoptObjRelB}{(\fpeval{\cplexObjB} - \fpeval{\zyoptObjB}) / \fpeval{\cplexObjB} * 100}
 \newcommand{\cplexHighsObjRelB}{(\fpeval{\cplexObjB} - \fpeval{\highsObjB}) / \fpeval{\cplexObjB} * 100}
+\newcommand{\cplexScipObjRelB}{(\fpeval{\cplexObjB} - \fpeval{\scipObjB}) / \fpeval{\cplexObjB} * 100}
 
 {
 	% \rowcolors{2}{white}{lightgray!15}
@@ -240,7 +244,7 @@ ZyOpt допускает пользовательскую конфигураци
 			%\hline
 		\rowcolor{black!5}	{CBC} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
 			%\hline
-			\rowcolor{blue!3}{SCIP 8.0.3} & $ 1.00^b $ & $ \infty $ & $ - $ & $ - $ \\
+			\rowcolor{blue!3}{SCIP 8.0.3} & $ 1.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\scipObjB, 6)}} $} $ (\fpeval{trunc(\cplexScipObjRelB, 3)}\%) $ & $ \fpeval{trunc(\firstSolScipObjB, 6)} $ & \fpeval{trunc(\firstSolScipTimeB, 3)} \\
 			%\hline
 			\rowcolor{black!5}{HiGHS 1.5.3} & $ 1.00^b $ & \ccb{$ \ccb{\fpeval{trunc(\highsObjB, 6)}} $} $ (\fpeval{trunc(\cplexHighsObjRelB, 3)}\%) $ & $ \fpeval{trunc(\firstSolHighsObjB, 6)} $ & $ \fpeval{trunc(\firstSolHighsTimeB, 3)} $ \\
 			%\hline
