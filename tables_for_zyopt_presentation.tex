@@ -99,6 +99,39 @@ ZyOpt допускает пользовательскую конфигураци
 \end{landscape}
 
 \begin{landscape}
+	{%
+		\begin{table}[!h]
+			\centering
+			\caption{Сводка отклонений от решений CPLEX 12.8.0.0\\ по набору проблем группы СОП}
+			\begin{tabular}{ p{3.3cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{1.6cm} | p{2.6cm} }
+				% {} & {} & {} & {} & \multicolumn{5}{c}{\emph{Полное время расчета, мин}}\\[2mm]
+				\emph{Проблемы группы СОП} & \emph{Решатель} & \emph{Нижняя граница} & \emph{Верхняя граница} & \emph{Зазор, \%} & \emph{Полное время расчета, мин} \\
+				\hline\hline
+				\rowcolor{blue!3}\texttt{out\_1.mps} & CBC & $ 44.69 $ & $ 53.0 $ & \ccb{$ 18.6 $} & $ 10.0^d $ \\
+				\rowcolor{black!5}{$ - $} & SCIP$^a $ & $ 48.90 $ & $ 53.0 $ & $ 8.4 $ & $ 10.0^d $ \\
+				\rowcolor{blue!3}{$ - $} & HiGHS$^b $ & $ 46.34 $ & $ 53.0 $ & $ 12.6 $ & $ 10.0^d $ \\
+				\rowcolor{black!5}{$ - $} & CPLEX$^c $& $ 52.0 $ & $ 53.0 $ & 1.9 & $ 10.0^d $ \\
+				\rowcolor{blue!3}{$ - $} & ZyOpt$ ^h $ & $ 49.11 $ & $ 53.0 $ & \ccg{$ 7.13 $} & $ 10.0^d $ \\
+			\end{tabular}		
+		\end{table}
+		\vspace*{-3mm}
+		\hspace*{5mm}$ a $ -- {\footnotesize SCIP 8.0.3}\\[-7mm]
+		
+		\hspace*{5mm}$ b $ -- {\footnotesize HiGHS 1.5.3}\\[-7mm]
+		
+		\hspace*{5mm}$ c $ -- {\footnotesize CPLEX 12.8.0.0 (база для сравнения)}\\[-7mm]
+		
+		\hspace*{5mm}$ d $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+		
+		\hspace*{5mm}$ f $ -- {\footnotesize Решение остановлено по нулевому зазору }\\[-6mm]
+		
+		\hspace*{5mm}$ h $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ p = 0.7 $}\\[-6mm]
+	}
+\end{landscape}
+
+
+
+\begin{landscape}
 {%
     \begin{table}[!h]
     	\centering
@@ -1004,4 +1037,6 @@ ZyOpt допускает пользовательскую конфигураци
 	
 	\hspace*{5mm}$ d $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ p = 0.5 $}\\[-7mm]
 }
+
+
 \end{document}
