@@ -99,39 +99,6 @@ ZyOpt допускает пользовательскую конфигураци
 \end{landscape}
 
 \begin{landscape}
-	{%
-		\begin{table}[!h]
-			\centering
-			\caption{Сводка отклонений от решений CPLEX 12.8.0.0\\ по набору проблем группы СОП}
-			\begin{tabular}{ p{3.3cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{1.6cm} | p{2.6cm} }
-				% {} & {} & {} & {} & \multicolumn{5}{c}{\emph{Полное время расчета, мин}}\\[2mm]
-				\emph{Проблемы группы СОП} & \emph{Решатель} & \emph{Нижняя граница} & \emph{Верхняя граница} & \emph{Зазор, \%} & \emph{Полное время расчета, мин} \\
-				\hline\hline
-				\rowcolor{blue!3}\texttt{out\_1.mps} & CBC & $ 44.69 $ & $ 53.0 $ & \ccb{$ 18.6 $} & $ 10.0^d $ \\
-				\rowcolor{black!5}{$ - $} & SCIP$^a $ & $ 48.90 $ & $ 53.0 $ & $ 8.4 $ & $ 10.0^d $ \\
-				\rowcolor{blue!3}{$ - $} & HiGHS$^b $ & $ 46.34 $ & $ 53.0 $ & $ 12.6 $ & $ 10.0^d $ \\
-				\rowcolor{black!5}{$ - $} & CPLEX$^c $& $ 52.0 $ & $ 53.0 $ & 1.9 & $ 10.0^d $ \\
-				\rowcolor{blue!3}{$ - $} & ZyOpt$ ^h $ & $ 49.11 $ & $ 53.0 $ & \ccg{$ 7.13 $} & $ 10.0^d $ \\
-			\end{tabular}		
-		\end{table}
-		\vspace*{-3mm}
-		\hspace*{5mm}$ a $ -- {\footnotesize SCIP 8.0.3}\\[-7mm]
-		
-		\hspace*{5mm}$ b $ -- {\footnotesize HiGHS 1.5.3}\\[-7mm]
-		
-		\hspace*{5mm}$ c $ -- {\footnotesize CPLEX 12.8.0.0 (база для сравнения)}\\[-7mm]
-		
-		\hspace*{5mm}$ d $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
-		
-		\hspace*{5mm}$ f $ -- {\footnotesize Решение остановлено по нулевому зазору }\\[-6mm]
-		
-		\hspace*{5mm}$ h $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ p = 0.7 $}\\[-6mm]
-	}
-\end{landscape}
-
-
-
-\begin{landscape}
 {%
     \begin{table}[!h]
     	\centering
@@ -867,7 +834,6 @@ ZyOpt допускает пользовательскую конфигураци
 %	\hspace*{5mm}$ c $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ p = 0.6 $}\\[-7mm]
 %}
 
-\vspace*{5mm}
 % ========================= MIPLIB2017 PROBLEMS =========================
 % ========================= csched008.mps =========================
 % original problem has 1536 variables (1284 bin, 0 int, 0 impl, 252 cont) and 351 constraints
@@ -1023,9 +989,9 @@ ZyOpt допускает пользовательскую конфигураци
 			%\hline
 			\rowcolor{blue!3}{SCIP 8.0.3} & $ 120.00^b $ & $ \fpeval{trunc(\scipObjV, 6)} $ & $ \fpeval{trunc(\firstSolScipObjV, 6)} $ & \fpeval{trunc(\firstSolScipTimeV, 3)} \\
 			%\hline
-			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 120.00^b $ & $ \fpeval{trunc(\highsObjV, 6)} $ & $ \fpeval{trunc(\firstSolHighsObjV, 6)} $ & \fpeval{trunc(\firstSolHighsTimeV, 3)} \\
+			\rowcolor{black!5}{HiGHS 1.5.3} & $ 120.00^b $ & $ \fpeval{trunc(\highsObjV, 6)} $ & $ \fpeval{trunc(\firstSolHighsObjV, 6)} $ & \fpeval{trunc(\firstSolHighsTimeV, 3)} \\
 			%\hline
-			\rowcolor{black!5}ZyOpt$^d$ & \ccg{$ 0.19^c (+99.68\%) $}  & \ccb{$ \fpeval{trunc(\zyoptObjV, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelV, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjV, 2)} $ & \fpeval{trunc(\firstSolZyoptTimeV, 3)} \\
+			\rowcolor{blue!3}ZyOpt$^d$ & \ccg{$ 0.19^c (+99.68\%) $}  & \ccb{$ \fpeval{trunc(\zyoptObjV, 6)} $} $ (\fpeval{trunc(\cplexZyoptObjRelV, 3)}\%) $ & $ \fpeval{trunc(\firstSolZyoptObjV, 2)} $ & \fpeval{trunc(\firstSolZyoptTimeV, 3)} \\
 		\end{tabular}
 	\end{table}
 	\vspace*{-3mm}
@@ -1037,6 +1003,485 @@ ZyOpt допускает пользовательскую конфигураци
 	
 	\hspace*{5mm}$ d $ -- {\footnotesize RELAX-PHASE: HiGHS (ipm), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ p = 0.5 $}\\[-7mm]
 }
+
+\newpage
+% ========================= 1day/1.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{1days/1.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 22 269 $ (\texttt{NBinVars}: $ 1333 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 55 647 $ \texttt{NonzeroDensity}: $ 7.8960 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{2} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^2 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 0.1^c $ & $ 1.742 \, (0.00\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 2.0^b $ & $ 1.742 \, (0.00\%) $ & $ 1.812 $ & 0.033 \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 2.0^b $ & $ 1.742 \, (0.01\%) $ & $ 1.743 $ & 0.025 \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d$ & {$ 0.1^c $}  & $ {1.742} \, (0.00\%) $ & $ 1.813 $ & 0.013 \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решение остановлено по нулевому зазору}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 1day/2.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{1days/2.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 37564 $ (\texttt{NBinVars}: $ 1494 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 62 797 $ \texttt{NonzeroDensity}: $ 7.0399 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 10.0^b $ & $ 5.816 \, (1.77\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 10.0^b $ & $ 6.175 \, (11.44\%) $ & $ 10.455 $ & 0.050 \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 10.0^b $ & $ 5.794 \, (6.55\%)$ & $ 6.205 $ & $ 0.067 $ \\
+			%\hline
+			\rowcolor{black!3}ZyOpt$^d$ & \ccg{$ 5.7^c $ (+43.0\%)} & \ccb{$ 6.272 \, (0.01\%) (-7.8\%) $} & $ 8.229 $ & $ 0.040 $ \\
+			%\hline
+			\rowcolor{black!3}ZyOpt$^d$ & \ccg{$ 5.7^c $ (+43.0\%)} & \ccb{$ 6.272 \, (0.01\%) (-7.8\%) $} & $ 8.229 $ & $ 0.040 $ \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решение остановлено по порогу зазора}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~($ s $), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~($\check{p}$), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 1day/3.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{1days/3.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 31 343 $ (\texttt{NBinVars}: $ 1576 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 54 382 $ \texttt{NonzeroDensity}: $ 8.8798 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 10.0^b $ & $ 2.296 \, (1.08\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 10.0^b $ & $ 2.291\, (1.36\%) $ & $ 6.513 $ & $ 0.117 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 10.0^b $ & $ 2.299 \, (5.45\%) $ & $ 4.310 $ & $ 0.328 $ \\
+			%\hline
+			\rowcolor{black!3}ZyOpt$^c$ & {$10.0 ^b $}  & \ccg{$ 2.291 \, (1.41\%) (+0.2\%) $} & $ 2.628 $ & $ 0.190 $ \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\newpage
+% ========================= 1day/4.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{1days/4.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 31328 $ (\texttt{NBinVars}: $ 1578 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 54114 $ \texttt{NonzeroDensity}: $ 8.9253 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 10.0^b $ & $ 2.377 \, (0.58\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 10.0^b $ & $ 2.387 \, (1.27\%) $ & $ 6.661 $ & $ 0.050 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 10.0^b $ & $ 2.553 \, (24.43.\%) $ & $ 4.474 $ & $ 0.337 $ \\
+			%\hline
+			\rowcolor{black!3}ZyOpt$^d $ & \ccg{$7.1 ^c \, (+29.0\%) $} & \ccb{$ 2.385 \, (0.01\%) (-2.1\%) $} & $ 4.230 $ & $ 0.222 $ \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решение остановлено по порогу зазора}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2day/1.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/1.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $  $ (\texttt{NBinVars}: $  $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ $ \texttt{NonzeroDensity}: $  \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 20.0^b $ & $ 3.576 \, (1.26\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ $ & $  \, (\%) $ & $  $ &  \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $  $ & $  \, (\%)$ & $  $ & $  $ \\
+			%\hline
+			\rowcolor{black!3}ZyOpt$^d$ & {$ ^c $}  & $  \, (\%) $ & $ 8.805 $ & $ 0.063 $ \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решение остановлено по порогу зазора}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2day/2.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/2.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 32 831 $ (\texttt{NBinVars}: $ 1596 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 58815 $ \texttt{NonzeroDensity}: $ 8.2088 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 10.0^b $ & $ 1.638 \, (2.78\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 10.0^b $ & $ 1.633 \, (3.36\%) $ & $ 1.699 $ & $ 1.033 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^c $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d$ & {$ 10.0^b $}  & \ccb{$ 1.647 \, (4.33\%) (-0.5\%) $} & $ 7.820$ & $ 0.097 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^f$ & {$ 10.0^b $}  & \ccb{$ 1.668 \, (5.54\%) (-1.8\%) $} & $ 4.912 $ & $ 0.122 $ \\
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize За 430 секунд удалось найти целевую функцию со значением $ 1.640 \cdot 10^{4} $, но решатель <<залип>>}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\newpage
+% ========================= 2day/3.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/3.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 32 831 $ (\texttt{NBinVars}: $ 1596 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 58 815 $ \texttt{NonzeroDensity}: $ 8.2088 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.6cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{2} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^2 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 4.180 \, (9.57\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 15.0^b $ & $ 4.292 \, (17.20\%) $ & $ 42.418 $ & $ 5.850 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 15.0^b $ & $ 4.108 \, (8.41\%) $ & $ 21.756 $ & $ 0.482 $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^c $ & {$ 15.0^b $}  & \ccb{$ 4.446 \, (18.59\%) (-6.4\%) $} & $ 11.571 $ & $ 0.147 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^d $ & {$ 15.0^b $}  & \ccg{$ 4.122 \, (11.24\%) (+1.4\%) $} & $ 8.469 $ & $ 0.150 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2day/4.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/4.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 32 826 $ (\texttt{NBinVars}: $ 1596 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 58 739 $ \texttt{NonzeroDensity}: $ 8.2193 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.6cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 3.229 \, (8.12\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $15.0^b $ & $ 3.200 \, (18.05\%) $ & $ 13.329 $ & $ 0.233 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^g $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^c $ & {$15.0^b $}  & \ccb{$ 3.345 \, (16.38\%) (-3.6\%) $} & $ 4.726 $ & $ 0.127 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^d $ & \ccg{$ 6.3^f (+58.0\%) $}  & \ccb{$ 3.627 \, (0.01\%) (-12.3\%) $} & $ 8.447 $ & $ 0.515 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize Решение остановлено по порогу зазора}\\[-7mm]
+	
+	\hspace*{3mm}$ g $ -- {\footnotesize За 92 секунду удалось найти целевую функцию со значением $ 4.269 \cdot 10^{3} $, но решатель <<залип>>}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 2day/5.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/5.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 35676 $ (\texttt{NBinVars}: $ 1752 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 64007 $ \texttt{NonzeroDensity}: $ 7.5143 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 2.319 \, (2.91\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 15.0^b $ & $ 2.304 \, (2.76\%) $ & $ 7.606 $ & $ 1.600 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3} & $ 15.0^b $ & $ 2.300 \, (1.66\%) $ & $ 5.129 $ & $ 0.367 $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^c $ & {$ - $}  & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^d $ & {$ 15.0^b $}  & \ccb{$ 2.351 \, (4.35\%) (-1.4\%) $} & $ 4.201 $ & $ 0.507 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\newpage
+% ========================= 2day/6.mps =========================
+\vspace*{-8mm}
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{2days/6.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 35676 $ (\texttt{NBinVars}: $ 1752 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 64007 $ \texttt{NonzeroDensity}: $ 7.5143 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.4cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{2} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^2 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 3.209 \, (1.26\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 15.0^b $ & $ 3.246 \, (2.52\%) $ & $ 4.292 $ & $ 2.433 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^c $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d $ & {$ -$}  & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^f $ & {$ 15.0^b $}  & \ccb{$ 3.524 \, (5.05\%) (-9.8\%) $} & $ 5.087 $ & $ 0.362 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решатель <<залип>>}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 3day/1.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{3days/1.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 35592 $ (\texttt{NBinVars}: $ 1691 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 65317 $ \texttt{NonzeroDensity}: $  7.4411 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.6cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 30.0^b $ & $ 3.416 \, (3.25\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^c $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d $ & {$ 30.0^b $}  & \ccb{$ 3.583 \, (8.52\%) (-4.9\%) $} & $ 11.024 $ & $ 2.688 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^f $ & {$ 30.0^b $}  & \ccb{$ 4.353 \, (3.83\%) (-27.4\%) $} & $ 8.803 $ & $ 1.915 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решатель <<залип>>}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\vspace*{5mm}
+% ========================= 3day/2.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{3days/2.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $ 44932 $ (\texttt{NBinVars}: $ 1691 $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $ 80107 $ \texttt{NonzeroDensity}: $ 5.6123 \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.8cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{3} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^3 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 6.237 \, (3.71\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ 15.0^b $ & $ 8.545 \, (43.05\%) $ & $ 8.5454 $ & $ 15.0 $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^c $ & $ 15.0^b $ & $ 6.420 \, (6.40\%)$ & $ 12.315 $ & $ 1.093 $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d $ & {$ 15.0^b $}  & \ccb{$ 8.002 \, (18.86\%) (-28.3\%) $} & $ 15.974 $ & $ 1.613 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^f $ & {$ 15.0^b $}  & \ccb{$ 8.002 \, (18.86\%) (-28.3\%) $} & $ 15.974 $ & $ 1.512 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решатель <<залип>>}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+\newpage
+% ========================= 3day/3.mps =========================
+
+{
+	% \rowcolors{2}{white}{lightgray!15}
+	\begin{table}[!h]
+		\centering
+		\caption{Сводка результатов анализа эффективности решателей\\ на проблеме группы СОП: \texttt{3days/3.mps}} 
+		
+		{\footnotesize \texttt{NVars}: $  $ (\texttt{NBinVars}: $  $,  \texttt{NIntVars}: $ 0 $) \texttt{NConss}: $  $ \texttt{NonzeroDensity}: $  \cdot 10^{-5} $}\\[2mm]
+		
+		\begin{tabular}{ p{2.9cm} | p{2.5cm} p{3.8cm} p{3.75cm} p{3.6cm} p{3.2cm} }
+			\rowcolor{black!5}\emph{Решатель} & \emph{Полное время \mbox{расчета, мин}} & \emph{Верхняя граница} \mbox{\itshape решения}, $ \times 10^{4} $ (\emph{зазор}, \%) & \emph{Целевая функция первого допустимого решения, $ \times 10^4 $} & \emph{Время поиска первого допустимого решения, мин} \\
+			%\hline\hline\\[-3.5mm]
+			\hline
+			\rowcolor{blue!3}{CPLEX 12.8.0.0}$ ^a $ & $ 15.0^b $ & $ 1.166\, (2.91\%) $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{black!5}{SCIP 8.0.3} & $ - $ & $ - $ & $ - $ & $ - $ \\
+			%\hline
+			\rowcolor{blue!3}{HiGHS 1.5.3}$ ^c $ & $ 15.0^b $ & $ 1.630 \, (30.54\%)$ & $ 1.630 $ & $ 9.737 $ \\
+			%\hline
+			\rowcolor{black!5}ZyOpt$^d $ & {$ 15.0^b $}  & \ccb{$ 1.226 \, (7.68\%) (-5.1\%) $} & $ 15.974 $ & $ 1.613 $ \\
+			%\hline
+			\rowcolor{blue!3}ZyOpt$^f $ & {$ 15.0^b $}  & \ccb{$ 1.285 \, (11.95\%) (-10.2\%) $} & $ 1.465 $ & $ 6.525 $ 
+		\end{tabular}
+	\end{table}
+	\vspace*{-3mm}
+	\hspace*{3mm}$ a $ -- {\footnotesize База для сравнения}\\[-7mm]
+	
+	\hspace*{3mm}$ b $ -- {\footnotesize Решение остановлено по времени}\\[-7mm]
+	
+	\hspace*{3mm}$ c $ -- {\footnotesize Решатель <<залип>>}\\[-7mm]
+	
+	\hspace*{3mm}$ d $ -- {\footnotesize RELAX-PHASE: SCIP~(s), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+	
+	\hspace*{3mm}$ f $ -- {\footnotesize RELAX-PHASE: SCIP~(p), MILP-PHASE: HiGHS, STRATEGY: FIXATION+PERTURBATION, $ \nu = 0.95 $, $ p = 0.8 $}\\[-7mm]
+}
+
+
+
+
+
 
 
 \end{document}
